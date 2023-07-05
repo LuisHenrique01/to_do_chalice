@@ -1,0 +1,105 @@
+swagger: '2.0'
+info:
+  title: TODO API
+  version: 1.0.0
+paths:
+  /task:
+    get:
+      summary: Obtém a lista de tarefas
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              tasks:
+                type: array
+                items:
+                  $ref: '#/definitions/Task'
+    post:
+      summary: Cria uma nova tarefa
+      parameters:
+        - name: task
+          in: body
+          description: Dados da nova tarefa
+          required: true
+          schema:
+            $ref: '#/definitions/TaskCreate'
+      responses:
+        201:
+          description: Created
+          schema:
+            $ref: '#/definitions/Task'
+  /task/{id}:
+    get:
+      summary: Obtém os detalhes de uma tarefa específica
+      parameters:
+        - name: id
+          in: path
+          description: ID da tarefa
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
+        404:
+          description: Not Found
+    put:
+      summary: Atualiza os detalhes de uma tarefa específica
+      parameters:
+        - name: id
+          in: path
+          description: ID da tarefa
+          required: true
+          type: integer
+        - name: task
+          in: body
+          description: Dados atualizados da tarefa
+          required: true
+          schema:
+            $ref: '#/definitions/TaskCreate'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Task'
+        404:
+          description: Not Found
+    delete:
+      summary: Exclui uma tarefa específica
+      parameters:
+        - name: id
+          in: path
+          description: ID da tarefa
+          required: true
+          type: integer
+      responses:
+        204:
+          description: No Content
+
+definitions:
+  TaskCreate:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      due_date:
+        type: string
+        format: date
+  Task:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+      description:
+        type: string
+      due_date:
+        type: string
+        format: date

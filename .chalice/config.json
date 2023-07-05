@@ -1,0 +1,15 @@
+{
+  "version": "2.0",
+  "app_name": "todo_app",
+  "stages": {
+    "dev": {
+      "region": "us-west-2",
+      "api_gateway_stage": "api",
+      "environment_variables": {
+        "AWS_ACCESS_KEY": "dummy",
+        "AWS_SECRET_KEY": "dummy",
+        "DYNAMODB_URL": "http://localhost:8000"
+      }
+    }
+  }
+}
